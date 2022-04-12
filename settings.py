@@ -14,6 +14,7 @@ class Settings:
         
         # Ship settings.
         self.ship_speed = 10
+        self.ship_limit = 3
 
         # Redraw the screen when this events occur.
         self.redraw_events = {
@@ -27,3 +28,10 @@ class Settings:
         self.bullet_heigh = 15
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 10
+
+        # Alien settings.
+        self.alien_speed = 2.0
+        self.fleet_drop_speed = 40
+                
+        # Fleet direction of 1 represents right, -1 represents left.
+        self.fleet_direction = 1
