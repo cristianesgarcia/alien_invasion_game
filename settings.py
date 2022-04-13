@@ -22,16 +22,19 @@ class Settings:
             pygame.KEYUP, }
 
         # Bullet settings.
-        self.bullet_width = 3
+        self.bullet_width = 300
         self.bullet_heigh = 15
         self.bullet_color = (60, 60, 60)
         self.bullets_allowed = 10
 
         # Alien settings.
-        self.fleet_drop_speed = 15
+        self.fleet_drop_speed = 10
         
         # How quickly the game speeds up
-        self.speedup_scale = 1.5
+        self.speedup_scale = 1
+
+        # How quickly the alien points values increase
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
     
@@ -44,8 +47,13 @@ class Settings:
         # Fleet direction of 1 represents right, -1 represents left.
         self.fleet_direction = 1
 
+        # Scoring
+        self.alien_points = 50
+
     def increase_speed(self):
-        """Increase speed settings."""
+        """Increase speed settings and alien point values."""
         self.ship_speed += self.speedup_scale
         self.bullet_speed += self.speedup_scale
         self.alien_speed += self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
