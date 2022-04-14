@@ -74,15 +74,7 @@ class AlienInvasion:
         """Start a new game when the player clicks Play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
-            # Reset the game settings.
-            self.settings.initialize_dynamic_settings()
-
-            # Reset the game statistics.
-            self.stats.reset_stats()
-            self.stats.game_active = True
-            self.scoreboard.prep_score()
-            self.scoreboard.prep_level()
-            self.scoreboard.prep_ships()
+            self.start_game()
 
             # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
@@ -94,6 +86,19 @@ class AlienInvasion:
 
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
+
+    def start_game(self):
+        """Reset the game settings and statistics."""
+        # Reset the game settings.
+        self.settings.initialize_dynamic_settings()
+
+        # Reset the game statistics.
+        self.stats.reset_stats()
+        self.stats.game_active = True
+        self.scoreboard.prep_images()
+        # self.scoreboard.prep_score()
+        # self.scoreboard.prep_level()
+        # self.scoreboard.prep_ships()
 
     def _check_keydown_events(self):
         """Respond to keypresses."""
@@ -152,15 +157,19 @@ class AlienInvasion:
             self.scoreboard.check_high_score()
 
         if not self.aliens:
-            # Destroy existing bullets and create a new fleet.
-            self.bullets.empty()
-            self._create_fleet()
-            self.settings.increase_speed()
-
-            # Increase level.
-            self.stats.level += 1
-            self.scoreboard.prep_level()
+            self.start_new_level()
     
+    def start_new_level(self):
+        """Start a new level when all fleet is destroyed."""
+        # Destroy existing bullets and create a new fleet.
+        self.bullets.empty()
+        self._create_fleet()
+        self.settings.increase_speed()
+
+        # Increase level.
+        self.stats.level += 1
+        self.scoreboard.prep_level()
+
     def _update_aliens(self):
         """
         Check if the fleet is at an edge,

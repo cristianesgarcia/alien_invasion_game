@@ -20,6 +20,9 @@ class Scoreboard():
         self.font = pygame.font.SysFont(None, 30)
         self.text_color_high_score = (237, 2, 2)
 
+        self.prep_images()
+
+    def prep_images(self):
         # Prepare the initial score image.
         self.prep_score()
         self.prep_high_score()
