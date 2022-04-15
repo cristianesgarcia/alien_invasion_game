@@ -40,6 +40,8 @@ class AlienInvasion:
 
         # Make the play button.
         self.play_button = Button(self, "Play")
+
+        self.pause_button = Button(self, "Game Paused.")
     
     def run_game(self):
         """Start the main loop for the game."""
@@ -48,7 +50,7 @@ class AlienInvasion:
         while True:
             self._check_events()
 
-            if self.stats.game_active:
+            if self.stats.game_active and self.stats.game_running:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
@@ -96,9 +98,6 @@ class AlienInvasion:
         self.stats.reset_stats()
         self.stats.game_active = True
         self.scoreboard.prep_images()
-        # self.scoreboard.prep_score()
-        # self.scoreboard.prep_level()
-        # self.scoreboard.prep_ships()
 
     def _check_keydown_events(self):
         """Respond to keypresses."""
@@ -112,7 +111,18 @@ class AlienInvasion:
             sys.exit()
         elif self.event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif self.event.key == pygame.K_ESCAPE:
+            self._pause_resume_game()
     
+    def _pause_resume_game(self):
+        if self.stats.game_running and self.stats.game_active:
+            self.stats.game_running = False
+            pygame.mouse.set_visible(True)
+        elif not self.stats.game_running and self.stats.game_active:
+            self.stats.game_running = True
+            pygame.mouse.set_visible(False)
+
+
     def _check_keyup_events(self):
         """Respond to key releases."""
         if self.event.key == pygame.K_RIGHT:
@@ -208,8 +218,6 @@ class AlienInvasion:
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
-        # if self.event == None or self.event.type in self.settings.redraw_events or \
-        #     self.ship.is_moving:
         # Redraw the screen during each pass through the loop.
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
@@ -222,8 +230,11 @@ class AlienInvasion:
         self.scoreboard.show_score()
 
         # Draw the play button if the game is inactive.
-        if not self.stats.game_active:
+        if not self.stats.game_active and self.stats.game_running:
             self.play_button.draw_button()
+        elif self.stats.game_active and not self.stats.game_running:
+            # self.message.draw_msg()
+            self.pause_button.draw_button()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()
