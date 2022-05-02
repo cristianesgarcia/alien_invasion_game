@@ -14,10 +14,8 @@ class Ship(Sprite):
         self.settings = alien_invasion_game.settings
 
         # Load the ship image and get its rect.
-        self.ship_path = '/home/cristiane/work/python_work/projects/'
-        self.ship_path += 'alien_invasion_game/images/ship.bmp'
-        self.ship_path_small = '/home/cristiane/work/python_work/projects/'
-        self.ship_path_small += 'alien_invasion_game/images/ship_small.bmp'
+        self.ship_path = 'images/ship.bmp'
+        self.ship_path_small = 'images/ship_small.bmp'
         if size == 'small':
             self.image = pygame.image.load(self.ship_path_small)
         else:

@@ -12,8 +12,7 @@ class Alien(Sprite):
         self.settings = alien_invasion_game.settings
 
         # Load the alien image and set its rect attribute.
-        self.alien_image_path = '/home/cristiane/work/python_work/projects/'
-        self.alien_image_path += 'alien_invasion_game/images/alien.bmp'
+        self.alien_image_path = 'images/alien.bmp'
         self.image = pygame.image.load(self.alien_image_path)
         self.rect = self.image.get_rect()
 

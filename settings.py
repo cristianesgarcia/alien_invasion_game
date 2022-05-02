@@ -10,7 +10,24 @@ class Settings:
         # Screen settings.
         self.screen_width = 640
         self.screen_heigh = 360
-        self.bg_color = (230, 230, 230)
+        # self.bg_color = (230, 230, 230)
+        self.bg_color = (30, 30, 30)
+
+        # Score screen settings.
+        # self.text_color_players = (180, 193, 185)
+        self.text_color_players = (255, 255, 255)
+        self.text_color_title = (237, 11, 11) # red
+        self.button_x = 200
+
+        # Title, subtitle, and separation size in the score screen.
+        self.title_txt = "Scores"
+        self.size_separator = 30
+        self.separator = '.'
+        self.space_in_lines = 30
+        self.space_on_top = 10
+        self.subtitle_txt = "Player "
+        self.subtitle_txt += f"{self.separator*self.size_separator}"
+        self.subtitle_txt += " Points"
         
         # Ship settings.
         self.ship_limit = 3
@@ -24,11 +41,11 @@ class Settings:
         # Bullet settings.
         self.bullet_width = 3
         self.bullet_heigh = 15
-        self.bullet_color = (60, 60, 60)
+        self.bullet_color = (255, 255, 255)
         self.bullets_allowed = 10
 
         # Alien settings.
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 5
         
         # How quickly the game speeds up
         self.speedup_scale = 1
